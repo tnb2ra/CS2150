@@ -1,3 +1,4 @@
+//Tien Bui tnb2ra Feb 2, 2016 List.cpp
 #include <iostream>
 #include "ListNode.h"
 #include "ListItr.h"
@@ -66,14 +67,12 @@ void List::makeEmpty(){ //removes/reclaims all items from a list, except the dum
 
 ListItr List::first(){ //Returns an iterator that points to
     //the ListNode in the first position
-	ListItr* x = new ListItr(head->next);
-	return *x;
+    return ListItr(head->next);
 }
 
 ListItr List::last(){			//Returns an iterator that points to
     //the ListNode in the last position
-    ListItr* x = new ListItr(tail->previous);
-	return *x;
+    return ListItr(tail->previous);
 }
 
 void List::insertAfter(int x, ListItr position){//Inserts x after current iterator position p
@@ -86,7 +85,6 @@ void List::insertAfter(int x, ListItr position){//Inserts x after current iterat
     temp->previous = position.current;
     temp->next = temp2;
     temp2->previous = temp;
-
 }
 
 void List::insertBefore(int x, ListItr position){  //Inserts x before current iterator position p
@@ -99,32 +97,59 @@ void List::insertBefore(int x, ListItr position){  //Inserts x before current it
     temp->next = position.current;
     temp->previous = temp2;
     temp2->next = temp;
-
 }
 
 void List::insertAtTail(int x){ //Insert x at tail of list
 	ListItr* iter = new ListItr(tail);
 	this->insertBefore(x,*iter);
-
 }
 
 void List::remove(int x){ //Removes the first occurrence of x
 	ListItr* iter = new ListItr(head);
 	while(!(iter->current->value==x)){
+        iter->moveForward();
 	}
+    iter->current->previous = iter->current->next;
+    delete iter->current;
 }
 
 ListItr List::find(int x){ //Returns an iterator that points to
     // the first occurrence of x, else return an iterator to the dummy tail node
-	return NULL;
+    ListItr* iter = new ListItr(head);
+    while(!(iter->current->value==x)){
+        iter->moveForward();
+        if(iter->current == NULL){
+            return *iter;
+        }
+    }
+	return *iter;
 
 }
 
 int List::size() const{ //Returns the number of elements in the list
-	return 0;
+	ListItr* iter = new ListItr(head);
+    int counter=0;
+    while(!(iter->current->next==NULL)){
+        counter++;
+        iter->moveForward();
+    }
+    return counter;
 }
 
 void printList(List& source, bool direction){ ////prints list forwards when direction is true
 //or backwards when direction is false
-
+   if(direction){
+        ListItr* iter = new ListItr(source.first());
+        while(!(iter->isPastEnd())){
+            cout<< iter->retrieve() << endl;
+            iter->moveForward();
+        }
+    }
+    else{
+        ListItr* iter = new ListItr(source.last());
+        while(!(iter->isPastBeginning())){
+            cout<< iter->retrieve() << endl;
+            iter->moveBackward();
+        }
+    }
 }
