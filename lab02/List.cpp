@@ -111,10 +111,7 @@ void List::insertAtTail(int x){ //Insert x at tail of list
 void List::remove(int x){ //Removes the first occurrence of x
 	ListItr* iter = new ListItr(head);
 	while(!(iter->current->value==x)){
-		iter = iter->current->next;
 	}
-	iter->current->previous = iter->current->next;
-	delete iter;
 }
 
 ListItr List::find(int x){ //Returns an iterator that points to

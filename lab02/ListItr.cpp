@@ -26,18 +26,18 @@ bool ListItr::isPastBeginning() const{ //Returns true if past first position in 
 
 void ListItr::moveForward(){ //Advances current to next position in list 
 	//(unless already past end of list)
-	if(!current.isPastEnd()){
+	if(!current->isPastEnd()){
 		current = current->next;
 	}
 }
 
 void ListItr::moveBackward(){ //Moves current back to previous position
     // in list (unless already past beginning of list)
-	if(!current.isPastBeginning()){
+	if(!current->isPastBeginning()){
 		current = current->previous;
 	}
 }
 
 int ListItr::retrieve() const{ //Returns item in current position
-	return current.value;
+	return current->value;
 }
