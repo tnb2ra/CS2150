@@ -123,3 +123,8 @@ ListItr List::find(int x){ //Returns an iterator that points to
 int List::size() const{ //Returns the number of elements in the list
 	return 0;
 }
+
+void List::printList(List& source, bool direction){ ////prints list forwards when direction is true
+//or backwards when direction is false
+
+}
